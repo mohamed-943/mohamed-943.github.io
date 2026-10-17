@@ -1,0 +1,136 @@
+.journey {
+  background: linear-gradient(180deg, var(--abyss), var(--night) 30%, var(--night) 70%, var(--abyss));
+}
+
+.jr-cols {
+  display: grid;
+  gap: 64px;
+}
+@media (min-width: 960px) {
+  .jr-cols {
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+    gap: clamp(48px, 7vw, 112px);
+  }
+}
+
+.jr-heading {
+  font-size: var(--step-1);
+  font-weight: 600;
+  color: var(--mute);
+  margin-bottom: 28px;
+  letter-spacing: -0.01em;
+}
+
+.jr-track {
+  position: relative;
+  padding-left: 36px;
+}
+.jr-items {
+  display: grid;
+  gap: 56px;
+}
+.jr-line {
+  position: absolute;
+  left: 5px;
+  top: 8px;
+  bottom: 8px;
+  width: 2px;
+  background: var(--line);
+  border-radius: 2px;
+}
+.jr-fill {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(var(--signal-2), var(--signal));
+  transform-origin: top;
+  border-radius: 2px;
+  box-shadow: 0 0 12px var(--signal);
+}
+.jr-item {
+  position: relative;
+}
+.jr-dot {
+  position: absolute;
+  left: -36px;
+  top: 6px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--abyss);
+  border: 2px solid var(--signal);
+}
+
+.jr-period {
+  color: var(--signal);
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-bottom: 6px;
+}
+.jr-role {
+  font-size: var(--step-2);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+}
+.jr-role span {
+  color: var(--ink-soft);
+  font-weight: 600;
+}
+.jr-sector {
+  color: var(--mute);
+  margin: 4px 0 16px;
+  font-size: 0.95rem;
+}
+.jr-points {
+  display: grid;
+  gap: 10px;
+  margin-bottom: 18px;
+  color: var(--ink-soft);
+}
+.jr-points li {
+  position: relative;
+  padding-left: 18px;
+}
+.jr-points li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.72em;
+  width: 7px;
+  height: 1.5px;
+  background: var(--mute);
+}
+.jr-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.jr-edu {
+  display: grid;
+  gap: 32px;
+  margin-bottom: 56px;
+}
+.jr-edu-title {
+  font-size: var(--step-1);
+  font-weight: 650;
+  letter-spacing: -0.02em;
+  line-height: 1.3;
+}
+.jr-edu-detail {
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+}
+.jr-edu .jr-sector {
+  margin-bottom: 8px;
+}
+.jr-langs {
+  display: grid;
+  gap: 8px;
+  color: var(--mute);
+}
+.jr-langs span {
+  color: var(--ink);
+  font-weight: 600;
+  margin-right: 6px;
+}

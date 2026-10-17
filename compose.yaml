@@ -1,0 +1,43 @@
+# docker compose up -d          → site de production sur http://localhost:8080
+# docker compose --profile dev up → serveur de développement Vite sur http://localhost:5173
+name: portfolio
+
+services:
+  web:
+    build:
+      context: .
+      target: runtime
+      args:
+        VITE_BASE: /
+        GIT_SHA: ${GIT_SHA:-local}
+    image: portfolio-mohamed:local
+    container_name: portfolio-web
+    ports:
+      - '8080:8080'
+    restart: unless-stopped
+    # Système de fichiers en lecture seule : seul /tmp est inscriptible (cache et PID de Nginx)
+    read_only: true
+    tmpfs:
+      - /tmp
+    security_opt:
+      - no-new-privileges:true
+    healthcheck:
+      test: ['CMD', 'wget', '-qO-', 'http://127.0.0.1:8080/healthz']
+      interval: 30s
+      timeout: 3s
+      retries: 3
+      start_period: 5s
+
+  dev:
+    profiles: [dev]
+    build:
+      context: .
+      target: dev
+    container_name: portfolio-dev
+    ports:
+      - '5173:5173'
+    volumes:
+      - .:/app # bind mount : vos modifications dans VS Code sont visibles immédiatement
+      - /app/node_modules # volume anonyme : garde les node_modules de l'image
+    environment:
+      - CHOKIDAR_USEPOLLING=true

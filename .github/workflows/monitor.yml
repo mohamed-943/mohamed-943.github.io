@@ -1,0 +1,46 @@
+# Surveillance : le site en ligne est vérifié toutes les 6 heures.
+# En cas d'échec, GitHub vous envoie un e-mail. Cours DevOps — phases OPERATE et MONITOR.
+name: Surveillance
+
+on:
+  schedule:
+    - cron: '17 */6 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  uptime:
+    runs-on: ubuntu-latest
+    env:
+      SITE_URL: ${{ vars.SITE_URL || format('https://{0}.github.io/', github.repository_owner) }}
+    steps:
+      - name: Disponibilité et temps de réponse
+        run: |
+          echo "Vérification de $SITE_URL"
+          out=$(curl -o /dev/null -s -w '%{http_code} %{time_total}' "$SITE_URL")
+          code=${out% *}; time=${out#* }
+          echo "Code HTTP : $code — temps : ${time}s"
+          echo "### $SITE_URL → $code en ${time}s" >> "$GITHUB_STEP_SUMMARY"
+          test "$code" = "200"
+          awk "BEGIN { exit !($time < 3) }"
+
+      - name: Les CV sont téléchargeables
+        run: |
+          curl -fsI "${SITE_URL}cv/CV_Mohamed_Traore_AI_Engineer.pdf" | grep -qi 'application/pdf'
+          curl -fsI "${SITE_URL}cv/CV_Mohamed_Traore_Data_Engineer.pdf" | grep -qi 'application/pdf'
+
+  lighthouse:
+    runs-on: ubuntu-latest
+    env:
+      SITE_URL: ${{ vars.SITE_URL || format('https://{0}.github.io/', github.repository_owner) }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Audit Lighthouse (performance, accessibilité, SEO)
+        uses: treosh/lighthouse-ci-action@v12
+        with:
+          urls: ${{ env.SITE_URL }}
+          configPath: ./lighthouserc.json
+          uploadArtifacts: true
+          temporaryPublicStorage: true

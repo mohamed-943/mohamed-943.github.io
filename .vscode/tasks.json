@@ -1,0 +1,23 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    { "label": "Dev : serveur Vite", "type": "npm", "script": "dev", "isBackground": true, "problemMatcher": [], "group": "build" },
+    {
+      "label": "Vérifier tout (comme la CI)",
+      "type": "npm",
+      "script": "check",
+      "problemMatcher": ["$tsc"],
+      "group": { "kind": "test", "isDefault": true }
+    },
+    {
+      "label": "Build de production",
+      "type": "npm",
+      "script": "build",
+      "problemMatcher": ["$tsc"],
+      "group": { "kind": "build", "isDefault": true }
+    },
+    { "label": "Docker : construire et lancer (8080)", "type": "shell", "command": "make run", "problemMatcher": [] },
+    { "label": "Docker Compose : up", "type": "shell", "command": "make up", "problemMatcher": [] },
+    { "label": "Docker Compose : down", "type": "shell", "command": "make down", "problemMatcher": [] }
+  ]
+}

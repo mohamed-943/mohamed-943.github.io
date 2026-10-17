@@ -1,0 +1,45 @@
+.sk-list {
+  margin: 0;
+  border-top: 1px solid var(--line);
+}
+.sk-row {
+  display: grid;
+  gap: 14px;
+  padding: 26px 0;
+  border-bottom: 1px solid var(--line);
+}
+.sk-row dt {
+  font-size: var(--step-1);
+  font-weight: 650;
+  letter-spacing: -0.02em;
+}
+.sk-row dd {
+  margin: 0;
+}
+.sk-row ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.sk-row .tag {
+  height: 34px;
+  padding: 0 14px;
+  font-size: 0.9rem;
+  color: var(--ink);
+  transition:
+    border-color 0.25s,
+    color 0.25s;
+}
+.sk-row .tag:hover {
+  border-color: var(--signal);
+  color: var(--signal);
+}
+.sk-row .tag-learning {
+  color: var(--mute);
+}
+@media (min-width: 800px) {
+  .sk-row {
+    grid-template-columns: 260px 1fr;
+    align-items: baseline;
+  }
+}

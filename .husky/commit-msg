@@ -1,0 +1,8 @@
+# Messages au format Conventional Commits : type(portée optionnelle): description
+# ex. feat: ajoute les captures de SENTINEL  /  fix(nav): menu mobile qui ne se ferme pas
+msg=$(head -n1 "$1")
+if ! echo "$msg" | grep -Eq '^(feat|fix|docs|style|refactor|perf|test|build|ci|chore|revert)(\([a-z0-9-]+\))?!?: .{3,}'; then
+  echo "✖ Message refusé : « $msg »"
+  echo "  Format attendu : type: description   (types : feat, fix, docs, style, refactor, perf, test, build, ci, chore)"
+  exit 1
+fi

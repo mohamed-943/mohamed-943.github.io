@@ -1,0 +1,40 @@
+/*
+  Design tokens — charte « réseau d'agents »
+  Reprend la bannière GitHub : bleu nuit + cyan, Inter.
+  L'ambre est réservé au sens « alerte / décision humaine » (anomalie, score de risque, revue médecin).
+*/
+:root {
+  --abyss: #060f1c;
+  --night: #0b1626;
+  --deep: #0f2440;
+  --deep-2: #14305a;
+  --ink: #e6edf5;
+  --ink-soft: #b9c7d8;
+  --mute: #8299b3;
+  --signal: #38bdf8;
+  --signal-2: #22d3ee;
+  --signal-dim: rgba(56, 189, 248, 0.16);
+  --line: rgba(148, 197, 255, 0.12);
+  --line-strong: rgba(148, 197, 255, 0.24);
+  --amber: #f5a524;
+  --amber-dim: rgba(245, 165, 36, 0.16);
+
+  --font-sans: 'Inter Variable', 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono Variable', 'JetBrains Mono', ui-monospace, 'SFMono-Regular', monospace;
+
+  /* Échelle typographique (≈ quarte augmentée, bornée pour le mobile) */
+  --step--1: clamp(0.8rem, 0.78rem + 0.1vw, 0.86rem);
+  --step-0: clamp(1rem, 0.97rem + 0.15vw, 1.08rem);
+  --step-1: clamp(1.2rem, 1.12rem + 0.4vw, 1.4rem);
+  --step-2: clamp(1.5rem, 1.3rem + 0.9vw, 2rem);
+  --step-3: clamp(2rem, 1.6rem + 2vw, 3.2rem);
+  --step-4: clamp(2.6rem, 1.8rem + 4vw, 5.2rem);
+  --step-5: clamp(3.2rem, 1.6rem + 8vw, 9rem);
+
+  --gutter: clamp(16px, 4vw, 56px);
+  --maxw: 1280px;
+  --radius-s: 6px;
+  --radius-m: 14px;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --nav-h: 68px;
+}

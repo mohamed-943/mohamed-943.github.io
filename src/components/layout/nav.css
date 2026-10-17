@@ -1,0 +1,125 @@
+.nav {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 50;
+  height: var(--nav-h);
+  transition:
+    transform 0.5s var(--ease-out),
+    background 0.3s,
+    border-color 0.3s;
+  border-bottom: 1px solid transparent;
+}
+.nav.is-scrolled {
+  background: rgba(6, 15, 28, 0.72);
+  backdrop-filter: blur(14px) saturate(1.4);
+  -webkit-backdrop-filter: blur(14px) saturate(1.4);
+  border-color: var(--line);
+}
+.nav.is-hidden {
+  transform: translateY(-100%);
+}
+.nav-inner {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+.nav-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 650;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  min-height: 44px;
+}
+.nav-brand svg {
+  color: var(--signal);
+}
+.nav-links {
+  display: flex;
+  gap: 4px;
+}
+.nav-links a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 14px;
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+  border-radius: 999px;
+  transition:
+    color 0.2s,
+    background 0.2s;
+}
+.nav-links a:hover {
+  color: var(--ink);
+  background: rgba(148, 197, 255, 0.07);
+}
+.nav-toggle {
+  display: none;
+}
+
+@media (max-width: 860px) {
+  .nav-toggle {
+    display: grid;
+    place-items: center;
+    width: 48px;
+    height: 48px;
+    margin-right: -10px;
+    position: relative;
+    z-index: 2;
+  }
+  .nav-burger,
+  .nav-burger::before {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: var(--ink);
+    border-radius: 2px;
+    transition: transform 0.4s var(--ease-out);
+  }
+  .nav-burger {
+    position: relative;
+    transform: translateY(-4px);
+  }
+  .nav-burger::before {
+    content: '';
+    position: absolute;
+    top: 8px;
+  }
+  .is-open .nav-burger {
+    transform: translateY(0) rotate(45deg);
+  }
+  .is-open .nav-burger::before {
+    transform: translateY(-8px) rotate(-90deg);
+  }
+  .nav-links {
+    position: fixed;
+    inset: 0;
+    flex-direction: column;
+    justify-content: center;
+    padding: var(--nav-h) var(--gutter);
+    background: var(--abyss);
+    gap: 8px;
+    clip-path: circle(0% at calc(100% - 40px) 34px);
+    transition: clip-path 0.7s var(--ease-out);
+    visibility: hidden;
+  }
+  .is-open .nav-links {
+    clip-path: circle(150% at calc(100% - 40px) 34px);
+    visibility: visible;
+  }
+  .nav-links a {
+    font-size: var(--step-3);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    color: var(--ink);
+    padding: 0;
+  }
+  .nav.is-open {
+    background: transparent;
+    backdrop-filter: none;
+  }
+}

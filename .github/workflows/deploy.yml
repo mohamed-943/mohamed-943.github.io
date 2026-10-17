@@ -1,0 +1,67 @@
+# Livraison et déploiement continus vers GitHub Pages à chaque push sur main.
+# Cours DevOps — phases RELEASE et DEPLOY.
+name: Déploiement GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - run: npm ci
+      - run: npm test
+
+      # Dépôt <utilisateur>.github.io → site à la racine ; autre dépôt → /<nom-du-dépôt>/
+      - name: Calculer la base d'URL
+        id: base
+        run: |
+          repo="${GITHUB_REPOSITORY#*/}"
+          if [ -n "${{ vars.CUSTOM_DOMAIN }}" ] || [ "$repo" = "${GITHUB_REPOSITORY_OWNER}.github.io" ]; then
+            echo "value=/" >> "$GITHUB_OUTPUT"
+          else
+            echo "value=/$repo/" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Build
+        run: npm run build
+        env:
+          VITE_BASE: ${{ steps.base.outputs.value }}
+          VITE_FORMSPREE_ID: ${{ vars.FORMSPREE_ID }}
+
+      - name: Domaine personnalisé (optionnel)
+        if: ${{ vars.CUSTOM_DOMAIN != '' }}
+        run: echo "${{ vars.CUSTOM_DOMAIN }}" > dist/CNAME
+
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

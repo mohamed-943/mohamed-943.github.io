@@ -1,0 +1,51 @@
+.pipeline {
+  margin: 0;
+}
+.pipeline-scroll {
+  overflow-x: auto;
+  padding: 8px 0 12px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--line-strong) transparent;
+}
+.pipeline svg {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+.pl-edge {
+  fill: none;
+  stroke: rgba(56, 189, 248, 0.38);
+  stroke-width: 1.5;
+}
+.pl-packet {
+  fill: var(--ice, #cfefff);
+  filter: drop-shadow(0 0 5px var(--signal));
+}
+.pl-node rect {
+  fill: var(--deep);
+  stroke: var(--line-strong);
+  stroke-width: 1;
+}
+.pl-node.is-accent rect {
+  stroke: var(--amber);
+  fill: #1d2a3a;
+}
+.pl-label {
+  fill: var(--ink);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+.pl-node.is-accent .pl-label {
+  fill: var(--amber);
+}
+.pl-sub {
+  fill: var(--mute);
+  font-family: var(--font-mono);
+  font-size: 11px;
+}
+.pipeline figcaption {
+  margin-top: 14px;
+  color: var(--mute);
+  font-size: 0.92rem;
+}

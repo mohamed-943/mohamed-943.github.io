@@ -1,0 +1,10 @@
+{
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.codeActionsOnSave": { "source.fixAll.oxc": "explicit" },
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "files.eol": "\n",
+  "[dockerfile]": { "editor.defaultFormatter": "ms-azuretools.vscode-containers" },
+  "[makefile]": { "editor.insertSpaces": false },
+  "search.exclude": { "dist": true, "package-lock.json": true }
+}
