@@ -26,7 +26,7 @@ ARG GIT_SHA=local
 ENV VITE_BASE=${VITE_BASE} GITHUB_SHA=${GIT_SHA}
 RUN npm run build
 
-FROM nginxinc/nginx-unprivileged:1.27-alpine AS runtime
+FROM nginxinc/nginx-unprivileged:1.31-alpine AS runtime
 ARG GIT_SHA=local
 LABEL org.opencontainers.image.title="portfolio-mohamed-traore" \
       org.opencontainers.image.description="Portfolio de Mohamed Traoré — AI Engineer / Data Engineer" \
