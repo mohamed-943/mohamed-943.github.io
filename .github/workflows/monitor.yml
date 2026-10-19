@@ -36,7 +36,7 @@ jobs:
     env:
       SITE_URL: ${{ vars.SITE_URL || format('https://{0}.github.io/', github.repository_owner) }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Audit Lighthouse (performance, accessibilité, SEO)
         uses: treosh/lighthouse-ci-action@v12
         with:
