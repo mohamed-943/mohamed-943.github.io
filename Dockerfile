@@ -27,6 +27,11 @@ ENV VITE_BASE=${VITE_BASE} GITHUB_SHA=${GIT_SHA}
 RUN npm run build
 
 FROM nginxinc/nginx-unprivileged:1.31-alpine AS runtime
+# Correctifs de sécurité publiés après la construction de l'image de base
+USER root
+RUN apk upgrade --no-cache
+USER 101
+
 ARG GIT_SHA=local
 LABEL org.opencontainers.image.title="portfolio-mohamed-traore" \
       org.opencontainers.image.description="Portfolio de Mohamed Traoré — AI Engineer / Data Engineer" \
