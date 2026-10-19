@@ -26,7 +26,12 @@ ARG GIT_SHA=local
 ENV VITE_BASE=${VITE_BASE} GITHUB_SHA=${GIT_SHA}
 RUN npm run build
 
-FROM nginxinc/nginx-unprivileged:1.27-alpine AS runtime
+FROM nginxinc/nginx-unprivileged:1.31-alpine AS runtime
+# Correctifs de sécurité publiés après la construction de l'image de base
+USER root
+RUN apk upgrade --no-cache
+USER 101
+
 ARG GIT_SHA=local
 LABEL org.opencontainers.image.title="portfolio-mohamed-traore" \
       org.opencontainers.image.description="Portfolio de Mohamed Traoré — AI Engineer / Data Engineer" \
@@ -37,4 +42,4 @@ COPY docker/nginx.conf /etc/nginx/conf.d/default.conf
 COPY --from=build /app/dist /usr/share/nginx/html
 EXPOSE 8080
 HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
-  CMD wget -qO- http://127.0.0.1:8080/healthz || exit 1
+      CMD wget -qO- http://127.0.0.1:8080/healthz || exit 1
