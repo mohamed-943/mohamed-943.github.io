@@ -19,6 +19,8 @@ npm run dev        # http://localhost:5173
 | `make up` / `make down` | site de production dans Docker (http://localhost:8080) |
 | `make help`             | toutes les commandes                                   |
 
+Mettre une modification en ligne (branche, PR, déploiement) : voir [docs/WORKFLOW.md](docs/WORKFLOW.md).
+
 ## Organisation
 
 ```
