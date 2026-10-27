@@ -74,6 +74,10 @@ jobs:
           load: true
           tags: portfolio:ci
           build-args: GIT_SHA=${{ github.sha }}
+          # Toujours la dernière image de base, et `apk upgrade` rejoué à chaque build :
+          # sinon le cache Docker resservirait des paquets Alpine périmés.
+          pull: true
+          no-cache-filters: runtime
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
